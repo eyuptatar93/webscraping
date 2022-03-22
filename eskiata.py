@@ -12,11 +12,11 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
-site = 'https://www.haremaltin.com/altin-fiyatlari'
+website = 'https://www.haremaltin.com/altin-fiyatlari'
 
 wd = webdriver.Chrome('chromedriver', options=options)
 
-wd.get(site)
+wd.get(website)
 
 time.sleep(5) 
 
@@ -24,11 +24,11 @@ html = wd.page_source
 
 df = pd.read_html(html)
 
-eski_ata= df[1][2][15]
-eski_ata = int((float(eski_ata))*1000)
-toplampara = int(input('Elimizdeki para: '))
+eski_ata = df[1][2][15]
+eski_ata = int((float(eski_ata))*1000) # converts the str into float and then the float value into int
+cash = int(input('The money we have: '))
 
-adet = int((toplampara / eski_ata))
-kalan = toplampara - (eski_ata * adet)
+piece = int((cash / eski_ata))
+rest = cash - (eski_ata * piece)
 
-print(f"Eski ata lira fiyatı {eski_ata} TL. Elimizdeki para ile {adet} adet ata lira alabiliriz ve geriye {kalan} lira para kalır.")
+print(f"It costs {eski_ata} TL. We can buy {piece} 'Ata Lira' gold and {rest} lira left.")
